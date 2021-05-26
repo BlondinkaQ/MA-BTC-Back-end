@@ -40,7 +40,6 @@ def buy_sell_crypto(trade, count_btc):
             type=Client.ORDER_TYPE_MARKET,
             quantity=round(count_btc, 6))
 
-    print(order)
     info = client_syn.get_asset_balance(asset='BTC')
     print(info)
 

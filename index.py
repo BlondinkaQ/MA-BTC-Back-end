@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 with open('config.json') as f:
     data_key = json.load(f)
 
-СURRENCY_CRYPTO = 'BTCUSDT'
+CURRENCY_CRYPTO = 'BTCUSDT'
 BTC_FOR_TRADE = 0.000312
 actual_api_key = data_key['TEST_API_KEY']
 actual_secret_key = data_key['TEST_SECRET_KEY']
@@ -47,11 +47,11 @@ def buy_sell_crypto(trade, count_btc):
 
 async def kline_listener(client):
     bm = BinanceSocketManager(client)
-    async with bm.kline_socket(symbol=СURRENCY_CRYPTO, interval='5m') as stream:
+    async with bm.kline_socket(symbol=CURRENCY_CRYPTO, interval='5m') as stream:
         data_check_buy = []
         while True:
             res = await stream.recv()
-            klines_nine_ago = client_syn.get_historical_klines(СURRENCY_CRYPTO, Client.KLINE_INTERVAL_5MINUTE, "50 min ago UTC")
+            klines_nine_ago = client_syn.get_historical_klines(CURRENCY_CRYPTO, Client.KLINE_INTERVAL_5MINUTE, "50 min ago UTC")
             date_kyiv = datetime.fromtimestamp(int(res['E']) / 1000).strftime('%d.%m.%Y %H:%M:%S')
             date_kyiv_not_formated = datetime.fromtimestamp(int(res['E']) // 1000)
             date_not_formated_year = datetime.fromtimestamp(int(res['E']) / 1000).year
